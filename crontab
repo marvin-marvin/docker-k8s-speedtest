@@ -2,9 +2,4 @@
 @reboot /usr/bin/crontab /etc/cron.d/crontab
 #*/15 * * * * /usr/bin/crontab /etc/cron.d/crontab
 
-# ENV
-SHELL=/bin/bash
-
-00 * * * * /root/speedtest --bytes --secure > /proc/1/fd/1 2>/proc/1/fd/2
-
 # An empty line is required at the end of this file for a valid cron file.

@@ -1,32 +1,19 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: DaemonSet
 metadata:
   annotations:
-    deployment.kubernetes.io/revision: "9"
     description: WAN LAN speedtest
-  creationTimestamp: null
-  generation: 1
   labels:
     k8s-app: speedtest
   name: speedtest
-  selfLink: /apis/extensions/v1beta1/namespaces/lan/deployments/speedtest
 spec:
-  progressDeadlineSeconds: 600
-  replicas: 1
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       k8s-app: speedtest
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       annotations:
         description: WAN LAN speedtest
-      creationTimestamp: null
       labels:
         k8s-app: speedtest
       name: speedtest
@@ -55,9 +42,9 @@ spec:
       dnsPolicy: ClusterFirst
       hostNetwork: true
       nodeSelector:
-        kubernetes.io/hostname: vps-us-ny-kube-1
+        kubernetes.io/arch: amd64
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-status: {}
+#status: {}

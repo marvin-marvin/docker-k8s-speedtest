@@ -1,6 +1,6 @@
 FROM marvinmarvin/docker-k8s-rclone
 RUN apt-get update -y && \
-    apt-get install wget && \
+    apt-get install git python3 python3-pip wget -y && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN /usr/bin/wget -q https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py -O /root/speedtest && \
-    /bin/chmod +x /root/speedtest
+RUN pip3 install speedtest-cli
+RUN which speedtest-cli
