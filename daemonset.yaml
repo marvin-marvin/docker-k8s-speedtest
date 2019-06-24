@@ -41,8 +41,8 @@ spec:
           type: Directory
       dnsPolicy: ClusterFirst
       hostNetwork: true
-      nodeSelector:
-        kubernetes.io/arch: amd64
+#      nodeSelector:
+#        kubernetes.io/arch: amd64
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
