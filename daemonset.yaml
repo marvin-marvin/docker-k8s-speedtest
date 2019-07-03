@@ -28,6 +28,7 @@ spec:
         volumeMounts:
         - mountPath: /etc/cron.d
           name: k8s-cfg-speedtest
+          readOnly: true
         resources: {}
         securityContext:
           privileged: false
