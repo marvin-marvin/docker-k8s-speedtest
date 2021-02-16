@@ -21,14 +21,18 @@ spec:
       containers:
       - env:
         - name: tz
-          value: Europe/Berlin
+          value: UTC
         image: marvinmarvin/docker-k8s-speedtest
         imagePullPolicy: Always
         name: speedtest
+#        volumeMounts:
+#        - mountPath: /etc/cron.d
+#          name: k8s-cfg-speedtest
+#          readOnly: true
         volumeMounts:
         - mountPath: /etc/cron.d
-          name: k8s-cfg-speedtest
-          readOnly: true
+          name: k8s-speedtest
+          subPath: speedtest
         resources: {}
         securityContext:
           privileged: false
@@ -36,14 +40,17 @@ spec:
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
       volumes:
-      - name: k8s-cfg-speedtest
-        hostPath:
-          path: /root/k8s-cfg/speedtest
-          type: Directory
+#      - name: k8s-cfg-speedtest
+#        hostPath:
+#          path: /root/k8s-cfg/speedtest
+#          type: Directory
+      - name: k8s-speedtest
+        persistentVolumeClaim:
+          claimName: k8s-pvc
       dnsPolicy: ClusterFirst
-      hostNetwork: true
+      hostNetwork: false
 #      nodeSelector:
-#        kubernetes.io/arch: amd64
+#        location: lan
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
